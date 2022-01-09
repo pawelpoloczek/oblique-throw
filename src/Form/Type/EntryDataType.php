@@ -5,6 +5,7 @@ namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\AtLeastOneOf;
 use Symfony\Component\Validator\Constraints\Blank;
@@ -27,6 +28,7 @@ class EntryDataType extends AbstractType
                 'required' => true,
                 'constraints' => [new AtLeastOneOf([new Blank(), new PositiveOrZero()])],
             ])
+            ->add('submit', SubmitType::class)
         ;
     }
 }

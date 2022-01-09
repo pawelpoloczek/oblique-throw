@@ -1,5 +1,22 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-<h1>Symulacja rzutu ukośnego</h1>
+    <h1>Symulacja rzutu ukośnego</h1>
+    {{ form_start(entryDataForm) }}
+    <div class="form-errors">
+        {{ form_errors(entryDataForm) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(entryDataForm.initialSpeed) }}
+        </div>
+        <div class="col">
+            {{ form_row(entryDataForm.throwAngle) }}
+        </div>
+        <div class="col">
+            {{ form_row(entryDataForm.time) }}
+        </div>
+    </div>
+    {{ form_end(entryDataForm) }}
 {% endblock %}
