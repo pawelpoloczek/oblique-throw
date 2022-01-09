@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Symulacja rzutu ukośnego</h1>
-    {{ form_start(entryDataForm) }}
+    {{ form_start(entryDataForm, {'attr': {'id': 'entry_data_form'}}) }}
     <div class="form-errors">
         {{ form_errors(entryDataForm) }}
     </div>
@@ -25,5 +25,5 @@
 {% endblock %}
 
 {% block javascripts %}
-
+    <script src="/js/form.js"></script>
 {% endblock %}

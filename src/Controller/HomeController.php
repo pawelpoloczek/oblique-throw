@@ -15,10 +15,18 @@ final class HomeController extends AbstractController
      */
     public function __invoke(): Response
     {
+        $form = $this->createForm(
+            EntryDataType::class,
+            null,
+            [
+                'action' => $this->generateUrl('calculate_chart_data'),
+            ]
+        )->createView();
+
         return $this->render(
             'home.html.twig',
             [
-                'entryDataForm' => $this->createForm(EntryDataType::class)->createView(),
+                'entryDataForm' => $form,
             ]
         );
     }

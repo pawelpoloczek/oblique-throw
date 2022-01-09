@@ -20,7 +20,6 @@ final class EntryDataType extends AbstractType
                 'initialSpeed',
                 NumberType::class,
                 [
-                    'required' => true,
                     'constraints' => [
                         new PositiveOrZero(),
                     ],
@@ -30,7 +29,6 @@ final class EntryDataType extends AbstractType
                 'throwAngle',
                 NumberType::class,
                 [
-                    'required' => true,
                     'constraints' => [
                         new PositiveOrZero(),
                     ],
@@ -40,7 +38,7 @@ final class EntryDataType extends AbstractType
                 'time',
                 NumberType::class,
                 [
-                    'required' => true,
+                    'required' => false,
                     'constraints' => [
                         new AtLeastOneOf([new Blank(), new PositiveOrZero()]),
                     ],
