@@ -40,7 +40,12 @@ final class EntryDataType extends AbstractType
                 [
                     'required' => false,
                     'constraints' => [
-                        new AtLeastOneOf([new Blank(), new PositiveOrZero()]),
+                        new AtLeastOneOf(
+                            [new Blank(), new PositiveOrZero()],
+                            null,
+                            null,
+                            'Wartość powinna spełniać jeden z warunków:'
+                        ),
                     ],
                 ]
             )

@@ -14,21 +14,15 @@ trait FormErrorsTrait
     ): array {
         $errorMessages = [];
         foreach ($form->getErrors() as $key => $error) {
-            $template = $error->getMessageTemplate();
-            $parameters = $error->getMessageParameters();
-
-            foreach ($parameters as $var => $value) {
-                $template = str_replace($var, $value, $template);
-            }
-
-            $errorMessages[$key] = $translator->trans($template);
+            $errorMessages[$key] = $translator->trans($error->getMessage());
         }
 
         if ($form->count()) {
             foreach ($form as $child) {
                 if (!$child->isValid()) {
                     $errorKey = $translator->trans($child->getName());
-                    $errorMessages[$errorKey] = $this->getFormErrorMessages($child, $translator);
+                    $errors = $this->getFormErrorMessages($child, $translator);
+                    $errorMessages[$errorKey] = reset($errors);
                 }
             }
         }
