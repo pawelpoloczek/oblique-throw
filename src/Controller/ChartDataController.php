@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Form\Type\EntryDataType;
+use App\Service\ChartDataCalculator;
 use App\Traits\FormErrorsTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,10 +17,14 @@ final class ChartDataController extends AbstractController
 {
     use FormErrorsTrait;
 
+    private ChartDataCalculator $chartDataCalculator;
     private TranslatorInterface $translator;
 
-    public function __construct(TranslatorInterface $translator)
-    {
+    public function __construct(
+        ChartDataCalculator $chartDataCalculator,
+        TranslatorInterface $translator
+    ) {
+        $this->chartDataCalculator = $chartDataCalculator;
         $this->translator = $translator;
     }
 
@@ -34,7 +39,7 @@ final class ChartDataController extends AbstractController
         $errors = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //todo generate chart
+            $chart = $this->chartDataCalculator->calculateChartData($form->getData());
         } elseif (!$form->isValid()) {
             $errors = $this->getFormErrorMessages($form, $this->translator);
         }
