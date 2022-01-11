@@ -49,9 +49,13 @@ class ChartDataCalculator
 
         for($t = 0.0; $t <= $chartData->getTotalTime(); $t += 0.1) {
             $x = $chartData->getInitialSpeedHorizontal() * $t;
-            $y = $chartData->getInitialSpeedVertical() * $t - (self::G * sqrt($t)) / 2;
+            $y = ($chartData->getInitialSpeedVertical() * $t) - ((self::G / 2) * sqrt($t));
             $coordinates[] = [$x, $y];
         }
+
+        $x = $chartData->getInitialSpeedHorizontal() * $chartData->getTotalTime();
+        $y = ($chartData->getInitialSpeedVertical() * $chartData->getTotalTime()) - ((self::G / 2) * sqrt($chartData->getTotalTime()));
+        $coordinates[] = [$x, $y];
 
         $chartData->setCoordinates($coordinates);
     }
