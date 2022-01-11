@@ -32,6 +32,27 @@ class ChartDataCalculator
         $maxHeight = sqrt($chartData->getInitialSpeedVertical()) / 2 * self::G;
         $chartData->setMaximumHeight($maxHeight);
 
+        $this->calculateCoordinates($chartData);
+
+        if ($chartData->getCurrentTime() === null) {
+            return $chartData;
+        }
+
+        //todo calculate current values
+
         return $chartData;
+    }
+
+    private function calculateCoordinates(ChartData $chartData): void
+    {
+        $coordinates = [];
+
+        for($t = 0.0; $t <= $chartData->getTotalTime(); $t += 0.1) {
+            $x = $chartData->getInitialSpeedHorizontal() * $t;
+            $y = $chartData->getInitialSpeedVertical() * $t - (self::G * sqrt($t)) / 2;
+            $coordinates[] = [$x, $y];
+        }
+
+        $chartData->setCoordinates($coordinates);
     }
 }
