@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ChartDataController extends AbstractController
@@ -19,13 +20,16 @@ final class ChartDataController extends AbstractController
 
     private ChartDataCalculator $chartDataCalculator;
     private TranslatorInterface $translator;
+    private SerializerInterface $serializer;
 
     public function __construct(
         ChartDataCalculator $chartDataCalculator,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        SerializerInterface $serializer
     ) {
         $this->chartDataCalculator = $chartDataCalculator;
         $this->translator = $translator;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -44,11 +48,16 @@ final class ChartDataController extends AbstractController
             $errors = $this->getFormErrorMessages($form, $this->translator);
         }
 
+        $responseData = [
+            'data' => $chart,
+            'errors' => $errors,
+        ];
+
         return new JsonResponse(
-            [
-                'data' => $chart,
-                'errors' => $errors,
-            ]
+            $this->serializer->serialize($responseData, 'json'),
+            200,
+            [],
+            true
         );
     }
 }

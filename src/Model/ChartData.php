@@ -9,6 +9,7 @@ final class ChartData
     private float $throwAngle;
     private ?float $currentTime;
     private float $maximumHeight;
+    private float $maximumHeightTime;
     private float $initialSpeedHorizontal;
     private float $initialSpeedVertical;
     private float $range;
@@ -38,7 +39,7 @@ final class ChartData
         return $this->throwAngle;
     }
 
-    public function getCurrentTime(): float
+    public function getCurrentTime(): ?float
     {
         return $this->currentTime;
     }
@@ -51,6 +52,16 @@ final class ChartData
     public function setMaximumHeight(float $maximumHeight): void
     {
         $this->maximumHeight = $maximumHeight;
+    }
+
+    public function getMaximumHeightTime(): float
+    {
+        return $this->maximumHeightTime;
+    }
+
+    public function setMaximumHeightTime(float $maximumHeightTime): void
+    {
+        $this->maximumHeightTime = $maximumHeightTime;
     }
 
     public function getInitialSpeedHorizontal(): float

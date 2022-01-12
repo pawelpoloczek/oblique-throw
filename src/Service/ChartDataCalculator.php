@@ -7,7 +7,7 @@ use App\Model\ChartData;
 
 class ChartDataCalculator
 {
-    private const G = 9.81;
+    private const G = 10;
 
     public function calculateChartData(array $formData): ChartData
     {
@@ -32,6 +32,9 @@ class ChartDataCalculator
         $maxHeight = sqrt($chartData->getInitialSpeedVertical()) / 2 * self::G;
         $chartData->setMaximumHeight($maxHeight);
 
+        $maxHeightTime = $chartData->getInitialSpeedVertical() / self::G;
+        $chartData->setMaximumHeightTime($maxHeightTime);
+
         $this->calculateCoordinates($chartData);
 
         if ($chartData->getCurrentTime() === null) {
@@ -49,7 +52,7 @@ class ChartDataCalculator
 
         for($t = 0.0; $t <= $chartData->getTotalTime(); $t += 0.1) {
             $x = $chartData->getInitialSpeedHorizontal() * $t;
-            $y = ($chartData->getInitialSpeedVertical() * $t) - ((self::G / 2) * sqrt($t));
+            $y = ($chartData->getInitialSpeedVertical() * $t) - ((self::G * sqrt($t))/2);
             $coordinates[] = [$x, $y];
         }
 
