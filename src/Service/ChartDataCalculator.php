@@ -50,14 +50,11 @@ class ChartDataCalculator
     private function calculateCoordinates(ChartData $chartData): void
     {
         $coordinates = [];
-
         for($t = 0.0; $t <= $chartData->getTotalTime(); $t += 0.1) {
             $x = $chartData->getInitialSpeedHorizontal() * $t;
             $y = ($chartData->getInitialSpeedVertical() * $t) - ((self::G * sqrt($t))/2);
-            $coordinates[] = [$x, $y];
+            $coordinates[] = ['x' => $x, 'y' => $y, 'time' => $t];
         }
-
-        $coordinates[] = [$chartData->getRange(), 0];
 
         $chartData->setCoordinates($coordinates);
     }
