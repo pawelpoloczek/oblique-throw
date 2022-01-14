@@ -26,7 +26,8 @@ class ChartDataCalculator
         $totalTime = (2 * $chartData->getInitialSpeed() * $sinAlpha) / self::G;
         $chartData->setTotalTime($totalTime);
 
-        $range = (2 * sqrt($chartData->getInitialSpeed()) * $sinAlpha * $cosAlpha) / self::G;
+        //$range = (2 * sqrt($chartData->getInitialSpeed()) * $sinAlpha * $cosAlpha) / self::G;
+        $range = $chartData->getInitialSpeedHorizontal() * $chartData->getTotalTime();
         $chartData->setRange($range);
 
         $maxHeight = sqrt($chartData->getInitialSpeedVertical()) / 2 * self::G;
@@ -56,9 +57,7 @@ class ChartDataCalculator
             $coordinates[] = [$x, $y];
         }
 
-        $x = $chartData->getInitialSpeedHorizontal() * $chartData->getTotalTime();
-        $y = ($chartData->getInitialSpeedVertical() * $chartData->getTotalTime()) - ((self::G / 2) * sqrt($chartData->getTotalTime()));
-        $coordinates[] = [$x, $y];
+        $coordinates[] = [$chartData->getRange(), 0];
 
         $chartData->setCoordinates($coordinates);
     }
