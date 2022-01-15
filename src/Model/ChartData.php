@@ -56,7 +56,7 @@ final class ChartData
 
     public function getMaximumHeightTime(): float
     {
-        return round($this->maximumHeightTime, 1);
+        return $this->maximumHeightTime;
     }
 
     public function setMaximumHeightTime(float $maximumHeightTime): void
@@ -106,7 +106,7 @@ final class ChartData
 
     public function getTotalTime(): float
     {
-        return round($this->totalTime, 1);
+        return $this->totalTime;
     }
 
     public function setTotalTime(float $totalTime): void

@@ -26,11 +26,9 @@ class ChartDataCalculator
         $totalTime = (2 * $chartData->getInitialSpeed() * $sinAlpha) / self::G;
         $chartData->setTotalTime($totalTime);
 
-        //$range = (2 * sqrt($chartData->getInitialSpeed()) * $sinAlpha * $cosAlpha) / self::G;
-        $range = $chartData->getInitialSpeedHorizontal() * $chartData->getTotalTime();
+        $range = (2 * ($chartData->getInitialSpeed() ** 2) * $sinAlpha * $cosAlpha) / self::G;
         $chartData->setRange($range);
-
-        $maxHeight = sqrt($chartData->getInitialSpeedVertical()) / 2 * self::G;
+        $maxHeight = (($chartData->getInitialSpeed() ** 2) / 2 * self::G) * ($sinAlpha ** 2) / 100;
         $chartData->setMaximumHeight($maxHeight);
 
         $maxHeightTime = $chartData->getInitialSpeedVertical() / self::G;
@@ -49,29 +47,18 @@ class ChartDataCalculator
 
     private function calculateCoordinates(ChartData $chartData): void
     {
-        $coordinatesX = [];
-        for($t = 0.0; $t <= $chartData->getTotalTime(); $t += 0.1) {
-            $coordinatesX[(string)$t] = $chartData->getInitialSpeedHorizontal() * $t;
-        }
-
-        $coordinatesY = [];
-        $mht = $chartData->getMaximumHeightTime();
-        for($t = 0.0; $t <= $mht; $t += 0.1) {
-            $coordinatesY[(string)$t] = ($chartData->getInitialSpeedVertical() * $t) - ((self::G * sqrt($t))/2);
-        }
-        $coordinatesY[(string)$mht] = ($chartData->getInitialSpeedVertical() * $mht) - ((self::G * sqrt($mht))/2);
-        $coordinatesYPart2 = \array_reverse($coordinatesY, true);
-        unset($coordinatesYPart2[(string)$mht]);
-        $arrayLastKey = \array_key_last($coordinatesY);
-        foreach ($coordinatesYPart2 as $coordinate) {
-            $arrayLastKey += 0.1;
-            $coordinatesY[(string)$arrayLastKey] = $coordinate;
-        }
-
         $coordinates = [];
-        foreach ($coordinatesX as $key => $coordinate) {
-            $coordinates[] = [$coordinate, $coordinatesY[$key]];
+        for($t = 0.0; $t <= $chartData->getTotalTime(); $t += 0.1) {
+            $coordinates[] = [
+                $chartData->getInitialSpeedHorizontal() * $t,
+                ($chartData->getInitialSpeedVertical() * $t) - ((self::G * $t ** 2)/2)
+            ];
         }
+
+        $coordinates[] = [
+            $chartData->getInitialSpeedHorizontal() * $chartData->getTotalTime(),
+            ($chartData->getInitialSpeedVertical() * $chartData->getTotalTime()) - ((self::G * $chartData->getTotalTime() ** 2)/2)
+        ];
 
         $chartData->setCoordinates($coordinates);
     }
