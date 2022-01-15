@@ -49,11 +49,28 @@ class ChartDataCalculator
 
     private function calculateCoordinates(ChartData $chartData): void
     {
-        $coordinates = [];
+        $coordinatesX = [];
         for($t = 0.0; $t <= $chartData->getTotalTime(); $t += 0.1) {
-            $x = $chartData->getInitialSpeedHorizontal() * $t;
-            $y = ($chartData->getInitialSpeedVertical() * $t) - ((self::G * sqrt($t))/2);
-            $coordinates[] = ['x' => $x, 'y' => $y, 'time' => $t];
+            $coordinatesX[(string)$t] = $chartData->getInitialSpeedHorizontal() * $t;
+        }
+
+        $coordinatesY = [];
+        $mht = $chartData->getMaximumHeightTime();
+        for($t = 0.0; $t <= $mht; $t += 0.1) {
+            $coordinatesY[(string)$t] = ($chartData->getInitialSpeedVertical() * $t) - ((self::G * sqrt($t))/2);
+        }
+        $coordinatesY[(string)$mht] = ($chartData->getInitialSpeedVertical() * $mht) - ((self::G * sqrt($mht))/2);
+        $coordinatesYPart2 = \array_reverse($coordinatesY, true);
+        unset($coordinatesYPart2[(string)$mht]);
+        $arrayLastKey = \array_key_last($coordinatesY);
+        foreach ($coordinatesYPart2 as $coordinate) {
+            $arrayLastKey += 0.1;
+            $coordinatesY[(string)$arrayLastKey] = $coordinate;
+        }
+
+        $coordinates = [];
+        foreach ($coordinatesX as $key => $coordinate) {
+            $coordinates[] = [$coordinate, $coordinatesY[$key]];
         }
 
         $chartData->setCoordinates($coordinates);
