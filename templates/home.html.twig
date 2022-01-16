@@ -6,16 +6,18 @@
 
     {{ form_start(entryDataForm, {'attr': {'id': 'entry_data_form'}}) }}
         <div class="row">
-            <div class="col">
+            <div class="col-1-2">
                 {{ form_row(entryDataForm.initialSpeed) }}
             </div>
-            <div class="col">
+            <div class="col-1-2">
                 {{ form_row(entryDataForm.throwAngle) }}
             </div>
-            <div class="col">
+        </div>
+        <div class="row">
+            <div class="col-1-2">
                 {{ form_row(entryDataForm.time) }}
             </div>
-            <div class="col">
+            <div class="col-1-2">
                 {{ form_row(entryDataForm.submit) }}
             </div>
         </div>
