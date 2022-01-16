@@ -6,22 +6,28 @@
 
     {{ form_start(entryDataForm, {'attr': {'id': 'entry_data_form'}}) }}
         <div class="row">
-            <div class="col-1-2">
+            <div class="element">
                 {{ form_row(entryDataForm.initialSpeed) }}
             </div>
-            <div class="col-1-2">
+            <div class="element">
                 {{ form_row(entryDataForm.throwAngle) }}
+            </div>
+            <div class="element">
+                {{ form_row(entryDataForm.time) }}
             </div>
         </div>
         <div class="row">
-            <div class="col-1-2">
-                {{ form_row(entryDataForm.time) }}
-            </div>
-            <div class="col-1-2">
+            <div class="element">
                 {{ form_row(entryDataForm.submit) }}
             </div>
         </div>
     {{ form_end(entryDataForm) }}
+    <div class="row">
+        <div id="data"></div>
+    </div>  
+    <div class="row">
+        <div id="chart"></div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

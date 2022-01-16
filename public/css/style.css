@@ -50,33 +50,25 @@ h4 {
 .container .row {
     padding: 15px 0;
     line-height: 28px;
+    display: block;
 }
 
-.container .row .col {
+.container .row .element {
     display: inline-block;
-    width: 100%;
-}
-
-.container .row .col-1-2 {
-    display: inline-block;
-    width: 49%;
-    position: relative;
 }
 
 form label {
     display: inline-block;
-    width: 40%;
+    padding-right: 15px;
 }
 
 form input {
     display: inline-block;
     border: solid 1px #7F7E7E;
-    width: 50%;
+    width: 200px;
     font-size: 18px;
     padding: 5px 15px;
     border-radius: 15px;
-    position: absolute;
-    right: 0;
 }
 
 form button {
@@ -84,7 +76,5 @@ form button {
     border-radius: 15px;
     background-color: #5BE675;
     font-size: 18px;
-    position: absolute;
-    right: 0;
-    top: -18px;
+    cursor: pointer;
 }
