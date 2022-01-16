@@ -8,16 +8,18 @@ final class ChartData
     private float $initialSpeed;
     private float $throwAngle;
     private ?float $currentTime;
-    private float $maximumHeight;
-    private float $maximumHeightTime;
-    private float $initialSpeedHorizontal;
-    private float $initialSpeedVertical;
-    private float $range;
-    private array $coordinates;
-    private float $totalTime;
-    private float $currentSpeed;
-    private float $currentSpeedHorizontal;
-    private float $currentSpeedVertical;
+    private float $maximumHeight = 0.0;
+    private float $maximumHeightTime = 0.0;
+    private float $climbTime = 0.0;
+    private float $fallTime = 0.0;
+    private float $initialSpeedHorizontal = 0.0;
+    private float $initialSpeedVertical = 0.0;
+    private float $range = 0.0;
+    private array $coordinates = [];
+    private float $totalTime = 0.0;
+    private float $currentSpeed = 0.0;
+    private float $currentSpeedHorizontal  = 0.0;
+    private float $currentSpeedVertical = 0.0;
 
     public function __construct(
         float $initialSpeed,
@@ -52,6 +54,26 @@ final class ChartData
     public function setMaximumHeight(float $maximumHeight): void
     {
         $this->maximumHeight = $maximumHeight;
+    }
+
+    public function getClimbTime(): float
+    {
+        return $this->climbTime;
+    }
+
+    public function setClimbTime(float $climbTime): void
+    {
+        $this->climbTime = $climbTime;
+    }
+
+    public function getFallTime(): float
+    {
+        return $this->fallTime;
+    }
+
+    public function setFallTime(float $fallTime): void
+    {
+        $this->fallTime = $fallTime;
     }
 
     public function getMaximumHeightTime(): float
