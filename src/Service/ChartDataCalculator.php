@@ -47,7 +47,7 @@ class ChartDataCalculator
 
     private function calculateCoordinates(ChartData $chartData): void
     {
-        $coordinates = [];
+        $coordinates = [['Zasięg', 'Wysokość']];
         for($t = 0.00; $t <= $chartData->getTotalTime(); $t += 0.05) {
             $coordinates[] = [
                 $chartData->getInitialSpeedHorizontal() * $t,

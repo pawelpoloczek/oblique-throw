@@ -27,6 +27,24 @@ $(document).ready(function() {
                         + '<div>Zasięg: ' + response.data.range + ' m</div>'
                         + '<div>Całkowity czas: ' + response.data.totalTime + ' s</div>'
                     );
+
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    console.log(response.data.coordinates);
+                    function drawChart() {
+                        const data = google.visualization.arrayToDataTable(response.data.coordinates);
+
+                        const options = {
+                            title: 'Tor rzutu ukośnego',
+                            curveType: 'function',
+                            legend: {position: 'bottom'}
+                        };
+
+                        const chart = new google.visualization.LineChart(document.getElementById('chart'));
+
+                        chart.draw(data, options);
+                    }
                 }
                 console.log(response);
             }
