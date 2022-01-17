@@ -12,13 +12,15 @@ $(document).ready(function() {
             success: function(response)
             {
                 if (response.errors) {
-                    $('#errors').empty();
+                    const errorsContainer = $('#errors');
+                    errorsContainer.empty();
                     $.each(response.errors, function (index, error){
-                        $('#errors').append('<div class="error">' + index + ': ' + error + '</div>');
+                        errorsContainer.append('<div class="error">' + index + ': ' + error + '</div>');
                     });
                 } else {
-                    $('#data').empty();
-                    $('#data').append(
+                    const dataContainer = $('#data');
+                    dataContainer.empty();
+                    dataContainer.append(
                         '<div>Prędkość początkowa: ' + response.data.initialSpeed + ' m/s</div>'
                         + '<div>Składowa Y prędkości początkowej: ' + response.data.initialSpeedVertical + ' m/s</div>'
                         + '<div>Składowa X prędkości początkowej: ' + response.data.initialSpeedHorizontal + ' m/s</div>'
@@ -38,7 +40,9 @@ $(document).ready(function() {
                         const options = {
                             title: 'Tor rzutu ukośnego',
                             curveType: 'function',
-                            legend: {position: 'bottom'}
+                            legend: {position: 'none'},
+                            hAxis: {title: 'Zasięg', minValue: 0, maxValue: 300},
+                            vAxis: {title: 'Wysokość', minValue: 0, maxValue: 50}
                         };
 
                         const chart = new google.visualization.LineChart(document.getElementById('chart'));
