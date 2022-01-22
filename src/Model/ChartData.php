@@ -15,7 +15,7 @@ final class ChartData
     private float $initialSpeedHorizontal = 0.0;
     private float $initialSpeedVertical = 0.0;
     private float $range = 0.0;
-    private array $coordinates = [];
+    private array $charts = [];
     private float $totalTime = 0.0;
     private float $currentSpeed = 0.0;
     private float $currentSpeedHorizontal  = 0.0;
@@ -116,14 +116,21 @@ final class ChartData
         $this->range = $range;
     }
 
-    public function getCoordinates(): array
+    /**
+     * @return Chart[]
+     */
+    public function getCharts(): array
     {
-        return $this->coordinates;
+        return $this->charts;
     }
 
-    public function setCoordinates(array $coordinates): void
+    public function addChart(Chart $chart): void
     {
-        $this->coordinates = $coordinates;
+        if (!in_array($chart, $this->charts)) {
+            return;
+        }
+
+        $this->charts[] = $chart;
     }
 
     public function getTotalTime(): float

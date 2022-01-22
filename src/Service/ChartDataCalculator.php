@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Model\Chart;
 use App\Model\ChartData;
 
 class ChartDataCalculator
 {
-    private const G = 10;
+    private const G = 9.81;
 
     public function calculateChartData(array $formData): ChartData
     {
@@ -47,7 +48,7 @@ class ChartDataCalculator
 
     private function calculateCoordinates(ChartData $chartData): void
     {
-        $coordinates = [['Zasięg', 'Wysokość']];
+        $coordinates = [];
         for($t = 0.00; $t <= $chartData->getTotalTime(); $t += 0.05) {
             $coordinates[] = [
                 $chartData->getInitialSpeedHorizontal() * $t,
@@ -60,6 +61,11 @@ class ChartDataCalculator
             ($chartData->getInitialSpeedVertical() * $chartData->getTotalTime()) - ((self::G * $chartData->getTotalTime() ** 2)/2)
         ];
 
-        $chartData->setCoordinates($coordinates);
+        $chartData->addChart(
+            new Chart(
+                ['Zasięg', 'Wysokość'],
+                $coordinates
+            )
+        );
     }
 }
