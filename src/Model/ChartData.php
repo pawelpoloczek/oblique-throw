@@ -24,7 +24,7 @@ final class ChartData
     public function __construct(
         float $initialSpeed,
         float $throwAngle,
-        ?float $currentTime
+        ?float $currentTime = null
     ) {
         $this->initialSpeed = $initialSpeed;
         $this->throwAngle = $throwAngle;

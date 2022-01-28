@@ -13,8 +13,8 @@ class ChartDataCalculator
     {
         $chartData = new ChartData(
             $formData['initialSpeed'],
-            $formData['throwAngle'],
-            $formData['time']
+            $formData['throwAngle']
+            //$formData['time']
         );
 
         $sinAlpha = sin(deg2rad($chartData->getThrowAngle()));
