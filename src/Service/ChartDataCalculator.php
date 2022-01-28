@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Model\Chart;
 use App\Model\ChartData;
 
 class ChartDataCalculator
 {
-    private const G = 9.81;
+    public const G = 9.81;
 
     public function calculateChartData(array $formData): ChartData
     {

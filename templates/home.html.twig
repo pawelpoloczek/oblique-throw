@@ -2,6 +2,9 @@
 
 {% block content %}
     <h1>Symulacja rzutu ukośnego</h1>
+    <p>Podaj w formularzu prędkość początkową (m/s) oraz kąt rzutu (&deg).<br/>
+{#        Jeśli chcesz oprócz podstawowych parametrów wyliczyć również dane na konkretny czas rzutu, podaj czas w sekundach#}
+    </p>
     <div id="errors"></div>
 
     {{ form_start(entryDataForm, {'attr': {'id': 'entry_data_form'}}) }}
@@ -12,9 +15,9 @@
             <div class="element">
                 {{ form_row(entryDataForm.throwAngle) }}
             </div>
-            <div class="element">
-                {{ form_row(entryDataForm.time) }}
-            </div>
+{#            <div class="element">#}
+{#                {{ form_row(entryDataForm.time) }}#}
+{#            </div>#}
         </div>
         <div class="row">
             <div class="element">

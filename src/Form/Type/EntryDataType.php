@@ -34,21 +34,21 @@ final class EntryDataType extends AbstractType
                     ],
                 ]
             )
-            ->add(
-                'time',
-                NumberType::class,
-                [
-                    'required' => false,
-                    'constraints' => [
-                        new AtLeastOneOf(
-                            [new Blank(), new PositiveOrZero()],
-                            null,
-                            null,
-                            'Wartość powinna spełniać jeden z warunków:'
-                        ),
-                    ],
-                ]
-            )
+//            ->add(
+//                'time',
+//                NumberType::class,
+//                [
+//                    'required' => false,
+//                    'constraints' => [
+//                        new AtLeastOneOf(
+//                            [new Blank(), new PositiveOrZero()],
+//                            null,
+//                            null,
+//                            'Wartość powinna spełniać jeden z warunków:'
+//                        ),
+//                    ],
+//                ]
+//            )
             ->add('submit', SubmitType::class)
         ;
     }
